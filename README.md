@@ -1,97 +1,181 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# mini‑vault
 
-# Getting Started
+一个完整的 React Native Web3 钱包示例项目，支持助记词生成/导入、账户管理、本地加密存储、链上交互、转账签名等核心功能。适合作为学习、二次开发或商业级钱包的基础架构。
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 项目简介
+mini‑vault 是一个轻量级的、可扩展的 **React Native Web3 钱包模板**，基于 **React Native 0.81+** 与 **TypeScript** 构建。主要用于演示如何在移动端实现：
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 钱包账户体系（助记词 → 私钥 → 地址）
+- 链上查询、转账与签名
+- 本地加密存储
+- UI/UX 钱包流程
+- 网络环境切换
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+该项目结构清晰，非常适合用作你自己的钱包 App 的起点。
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+## ✨ 功能特性
+- ✅ 助记词生成（BIP39）
+- ✅ 助记词导入恢复钱包
+- ✅ 私钥/助记词加密存储
+- ✅ 地址派生（支持 BIP44 路径）
+- ✅ EVM 链交互（ethers.js）
+- ✅ 查询余额
+- ✅ 发起链上转账
+- ✅ 交易签名 & 广播
+- ✅ 基于 Zustand 的全局状态管理
+- ✅ 现代化 RN UI 结构（可无缝升级）
+
+---
+
+## 📦 技术栈
+- **React Native 0.81+**
+- **TypeScript**
+- **ethers.js v6** (链上交互)
+- **Zustand** (状态管理)
+- **AsyncStorage / Keychain**（敏感数据存储）
+- **React Navigation**（路由）
+- Tailwind 风格 UI 可选
+
+---
+
+## 📂 项目结构
+```
+mini-vault/
+├── src/
+│   ├── components/        # UI 组件
+│   ├── screens/           # 钱包页面（创建钱包/导入/首页等）
+│   ├── navigation/        # 路由结构
+│   ├── services/
+│   │   ├── wallet/        # 钱包核心逻辑（助记词/派生/私钥）
+│   │   ├── chain/         # 链上 RPC、余额、转账等
+│   │   ├── storage/       # 本地存储封装
+│   ├── store/             # 全局状态（Zustand）
+│   └── utils/             # 工具函数
+├── ios/
+├── android/
+└── README.md
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 🛠️ 安装与运行
+### 1. 克隆项目
+```bash
+git clone https://github.com/aaronzyf/mini-vault.git
+cd mini-vault
+```
 
-### Android
+### 2. 安装依赖
+```bash
+yarn install
+```
 
-```sh
-# Using npm
-npm run android
+### 3. iOS 初始化
+```bash
+cd ios && pod install && cd ..
+```
 
-# OR using Yarn
+### 4. 启动项目
+#### Android
+```bash
 yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
+#### iOS
+```bash
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+---
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+## 🔑 助记词 & 钱包创建
+项目使用 **ethers.js** 生成助记词：
+```ts
+import { Wallet, Mnemonic } from 'ethers';
 
-## Step 3: Modify your app
+const mnemonic = Mnemonic.fromEntropy();
+const wallet = Wallet.fromPhrase(mnemonic.phrase);
+```
 
-Now that you have successfully run the app, let's make changes!
+支持恢复钱包：
+```ts
+const wallet = Wallet.fromPhrase(userInputMnemonic);
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+---
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## 🔐 本地加密存储
+可选：
+- **AsyncStorage（默认）**
+- **react-native-keychain（更安全）**
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+存储示例：
+```ts
+await AsyncStorage.setItem('vault', encryptedData);
+```
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🔗 链上操作
+### 查询余额
+```ts
+import { ethers } from 'ethers';
 
-### Now what?
+const provider = new ethers.JsonRpcProvider(RPC_URL);
+const balance = await provider.getBalance(address);
+```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### 发送交易
+```ts
+const signer = wallet.connect(provider);
 
-# Troubleshooting
+await signer.sendTransaction({
+  to: receiver,
+  value: ethers.parseEther('0.01'),
+});
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+---
 
-# Learn More
+## 🧩 环境变量
+你可以在 `.env` 中配置 RPC：
+```
+RPC_MAINNET=
+RPC_TESTNET=
+```
 
-To learn more about React Native, take a look at the following resources:
+---
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## ✅ 计划与 Roadmap
+- [ ] WalletConnect 支持
+- [ ] 多链（Polygon / BSC / Arbitrum）
+- [ ] Token 与 NFT 资产展示
+- [ ] 离线签名
+- [ ] UI 主题 & 动效
+- [ ] 合约交互（Swap / 质押）
+
+---
+
+## 📱 截图 (可自行替换)
+你可以在此处放置项目截图：
+```
+assets/
+ ├── home.png
+ ├── create-wallet.png
+ └── send.png
+```
+
+---
+
+## 🤝 贡献
+欢迎提交 PR / Issue 来帮助改进 mini‑vault。
+
+---
+
+## 📄 License
+MIT
+
