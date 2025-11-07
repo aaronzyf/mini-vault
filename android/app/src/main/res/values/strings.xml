@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">mini_vault</string>
+    <string name="app_name">Mini Vault</string>
+    <string name="welcome_to_my_app">Welcome to My App</string>
+    <string name="app_logo">App Logo</string>
 </resources>

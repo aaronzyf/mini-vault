@@ -1,5 +1,22 @@
 {
   "extends": "@react-native/typescript-config",
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/node_modules", "**/Pods"]
+  "exclude": ["**/node_modules", "**/Pods"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@mini-vault-services/*": ["./services/*"],
+      "@mini-vault-assets/*": ["./assets/*"],
+      "@mini-vault-components/*": ["./components/*"],
+      "@mini-vault-ui/*": ["./ui/*"],
+      "@mini-vault-ui/icons/*": ["./ui/icons/*"],
+      "@mini-vault-helpers/*": ["./helpers/*"],
+      "@mini-vault-types/*": ["./types/*"],
+      "@mini-vault-hooks/*": ["./hooks/*"],
+      "@mini-vault-pages/*": ["./pages/*"],
+      "@mini-vault-storage/context/*": ["./storage/context/*"],
+      "@mini-vault-storage/database/*": ["./storage/database/*"]
+    }
+
+  }
 }
