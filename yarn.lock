@@ -4335,6 +4335,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"babel-plugin-inline-import@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "babel-plugin-inline-import@npm:3.0.0"
+  dependencies:
+    require-resolve: 0.0.2
+  checksum: b43c3b9f05fd9fd01a17b7a92025bfe82caf71198b8fce4698a52b7288376f9bf3f7831f9229adcd51a5b02894af61709d332131f40e820f40d4278587c1d99e
+  languageName: node
+  linkType: hard
+
 "babel-plugin-istanbul@npm:^6.1.1":
   version: 6.1.1
   resolution: "babel-plugin-istanbul@npm:6.1.1"
@@ -9254,6 +9263,7 @@ __metadata:
     "@types/jest": ^29.5.13
     "@types/react": ^19.1.0
     "@types/react-test-renderer": ^19.1.0
+    babel-plugin-inline-import: ^3.0.0
     babel-plugin-module-resolver: ^5.0.2
     babel-preset-expo: ~54.0.0
     cross-env: ^10.1.0
@@ -9980,6 +9990,13 @@ __metadata:
   version: 4.0.0
   resolution: "path-exists@npm:4.0.0"
   checksum: 505807199dfb7c50737b057dd8d351b82c033029ab94cb10a657609e00c1bc53b951cfdbccab8de04c5584d5eff31128ce6afd3db79281874a5ef2adbba55ed1
+  languageName: node
+  linkType: hard
+
+"path-extra@npm:^1.0.2":
+  version: 1.0.3
+  resolution: "path-extra@npm:1.0.3"
+  checksum: 98529f1d75bb41c3f9fc0b60dfc21becbc2b2fe9972d357b4f50dc41559057dfe6ea5f16936c66725d828e20bfce9d64b237d69e938b3168f268eb513f167906
   languageName: node
   linkType: hard
 
@@ -10711,6 +10728,15 @@ __metadata:
   version: 2.0.0
   resolution: "require-main-filename@npm:2.0.0"
   checksum: e9e294695fea08b076457e9ddff854e81bffbe248ed34c1eec348b7abbd22a0d02e8d75506559e2265e96978f3c4720bd77a6dad84755de8162b357eb6c778c7
+  languageName: node
+  linkType: hard
+
+"require-resolve@npm:0.0.2":
+  version: 0.0.2
+  resolution: "require-resolve@npm:0.0.2"
+  dependencies:
+    x-path: ^0.0.2
+  checksum: 835896864d0c01ec7032d269953aa9541a4cc1811872a2c4430a6311bbfb90ecfbfa30497580e139a70106ea6effcf34b4d1931dbed2c6c0f9f9bf08ca9a2e0d
   languageName: node
   linkType: hard
 
@@ -12509,6 +12535,15 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: d64ef1631227bd0c5fe21b3eb3646c9c91229402fb963d12d87b49af0a1ef757277083af23a5f85742bae1e520feddfb434cb882ea59249b15673c16dc3f36e0
+  languageName: node
+  linkType: hard
+
+"x-path@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "x-path@npm:0.0.2"
+  dependencies:
+    path-extra: ^1.0.2
+  checksum: 45a696294afd75e1f29728d616e61b03d76cec9db06960f90e7f518cb594cdedde5a120986956bc8f9094a3c9df40820473f16db701f204b71e400aaa870083f
   languageName: node
   linkType: hard
 

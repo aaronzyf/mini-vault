@@ -7,6 +7,7 @@ import {
   Rect,
   RoundedRect,
   Shader,
+  Skia,
   Text,
   useClock,
   useFont,
@@ -14,9 +15,12 @@ import {
 } from '@shopify/react-native-skia';
 import { StyleSheet, useWindowDimensions } from 'react-native';
 import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
-import { shader } from './shader.ts';
 import React, { useEffect, useRef } from 'react';
 import { DeviceMotion } from 'expo-sensors';
+
+import galaxyShaderString from './galaxy.sksl';
+
+const shader = Skia.RuntimeEffect.Make(galaxyShaderString)!;
 
 const LaunchScreen: React.FC<{}> = () => {
   const { width, height } = useWindowDimensions();

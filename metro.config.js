@@ -7,6 +7,14 @@ const { mergeConfig } = require('@react-native/metro-config');
  *
  * @type {import('@react-native/metro-config').MetroConfig}
  */
-const config = {};
+const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+// 修改 resolver 允许 .sksl 文件
+const config = {
+  resolver: {
+    assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'sksl'),
+    sourceExts: [...defaultConfig.resolver.sourceExts, 'sksl'],
+  },
+};
+
+module.exports = mergeConfig(defaultConfig, config);

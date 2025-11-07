@@ -47,6 +47,9 @@ module.exports = {
         },
       },
     ],
+    ['inline-import', {
+      extensions: ['.sksl']
+    }],
     'react-native-reanimated/plugin', // 必须放在最后
   ],
 };

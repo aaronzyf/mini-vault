@@ -12,7 +12,7 @@ import {
 } from 'react-native-safe-area-context';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
-import { NewAppScreen } from '@react-native/new-app-screen';
+import LaunchScreen from '@mini-vault-components/launch-screen';
 
 
 // Prevent native splash screen from autohiding before App component declaration
@@ -51,7 +51,7 @@ function AppContent() {
 
   return (
     <View style={styles.container}>
-      <NewAppScreen/>
+      <LaunchScreen/>
     </View>
   );
 }
