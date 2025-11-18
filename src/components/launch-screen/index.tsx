@@ -18,7 +18,7 @@ import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 import React, { useEffect, useRef } from 'react';
 import { DeviceMotion } from 'expo-sensors';
 
-import galaxyShaderString from './galaxy.sksl';
+import galaxyShaderString from './galaxy.glsl';
 
 const shader = Skia.RuntimeEffect.Make(galaxyShaderString)!;
 
@@ -35,7 +35,7 @@ const LaunchScreen: React.FC<{}> = () => {
   const logoHeight = svgOriginalHeight * scale;
 
   const translateX = (width - logoWidth) / 2;
-  const translateY = (height - logoHeight) / 2 - 50; // 上移50给文字留空间
+  const translateY = (height - logoHeight) / 2; // 上移50给文字留空间
 
   // ---- 背景 shader + 陀螺仪 ----
   const clock = useClock();
@@ -132,13 +132,7 @@ const LaunchScreen: React.FC<{}> = () => {
           transform={[{ translateX }, { translateY }, { scale }]}
         >
           <Group>
-            <RoundedRect
-              x={0}
-              y={0}
-              width={1000}
-              height={1000}
-              r={120}
-            ></RoundedRect>
+            <RoundedRect x={0} y={0} width={1000} height={1000} r={120} />
             <LinearGradient
               start={vec(0, 0)}
               end={vec(width, height)}
@@ -179,7 +173,7 @@ const LaunchScreen: React.FC<{}> = () => {
               start={vec(titleX, titleY)}
               end={vec(titleX + titleWidth, titleY)}
               colors={['#2563EB', '#7C3AED']}
-            ></LinearGradient>
+            />
             <BlurMask blur={titleBlur} style="solid" />
           </Text>
         )}

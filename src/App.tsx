@@ -47,11 +47,9 @@ function App() {
 }
 
 function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
   return (
     <View style={styles.container}>
-      <LaunchScreen/>
+      <LaunchScreen />
     </View>
   );
 }
@@ -59,6 +57,7 @@ function AppContent() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0F0F0F',
   },
 });
 
